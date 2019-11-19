@@ -43,6 +43,7 @@ namespace WpfApp2
         public FilterMiddle filterMiddle = new FilterMiddle("全部", "0-0");
         public SorterFormer sorterFormer = new SorterFormer("学习时间");
         public FinderFormer finderFormer = new FinderFormer("");
+        public FilterRear filterRear = new FilterRear("全部");
         public SingleChoiceQuestions SingleChoice = new SingleChoiceQuestions(ref zJSON, "顺序");
         public TranslateQuestion GetTranslate = new TranslateQuestion(ref zJSON,"顺序");
 
@@ -57,6 +58,7 @@ namespace WpfApp2
             filterMiddle.Filter(ref DC.DisplayContent);
             sorterFormer.Sortor(ref DC.DisplayContent);
             finderFormer.Finder(ref DC.DisplayContent);
+            filterRear.Filter(ref DC.DisplayContent);
             ShowCount.Text = DC.DisplayContent.Count.ToString();
 
             this.Dispatcher.BeginInvoke((Action)delegate () { EntryListView.ItemsSource = DC.DisplayContent; });
@@ -86,6 +88,9 @@ namespace WpfApp2
 
             TranslateMode.ItemsSource = GetTranslate.SupportedMode;
             TranslateMode.SelectedIndex = 0;
+
+            Sortor2.ItemsSource = filterRear.SupportedFilterMode;
+            Sortor2.SelectedIndex = 0;
 
             ImportType.ItemsSource = NewOneClass.ItemsSource = new string[] { "单词","语法","翻译"};
 
@@ -402,6 +407,13 @@ namespace WpfApp2
                     MessageBox.Show("保存文件出错了");
                 }
             }
+        }
+
+        private void Sortor2_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            filterRear.FilterMode = (string)Sortor2.SelectedValue;
+            filterRear.FilterParam = FilterRearParam.Text;
+            UpdateListView();
         }
     }
     

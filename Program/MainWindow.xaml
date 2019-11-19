@@ -23,7 +23,7 @@
                 <Grid>
                     <GroupBox Header="Entry Opt" HorizontalAlignment="Left" Height="160" VerticalAlignment="Top" Width="1336" BorderBrush="#FF00E2FF" Foreground="#FF00E2FF" Margin="0,95,0,0">
                         <Grid HorizontalAlignment="Left" Height="135" Margin="-6,-10,-2,-1" VerticalAlignment="Top" Width="1332">
-                            <TextBox x:Name="KeywordInput" HorizontalAlignment="Left" Height="35" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="465">
+                            <TextBox x:Name="KeywordInput" HorizontalAlignment="Left" Height="35" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="155">
                                 <TextBox.Foreground>
                                     <SolidColorBrush Color="{DynamicResource Color2}"/>
                                 </TextBox.Foreground>
@@ -31,7 +31,7 @@
                                     <SolidColorBrush Color="{DynamicResource Color1}"/>
                                 </TextBox.Background>
                             </TextBox>
-                            <Button x:Name="KeyWordInputButton" Content="搜索" HorizontalAlignment="Left" Margin="480,10,0,0" VerticalAlignment="Top" Width="155" Focusable="False" Click="KeyWordInput_Click">
+                            <Button x:Name="KeyWordInputButton" Content="搜索" HorizontalAlignment="Left" Margin="170,10,0,0" VerticalAlignment="Top" Width="155" Focusable="False" Click="KeyWordInput_Click">
                                 <Button.Background>
                                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                                         <GradientStop Color="#FF2E00FE" Offset="1"/>
@@ -42,7 +42,7 @@
                                     <SolidColorBrush Color="{DynamicResource Color5}"/>
                                 </Button.Foreground>
                             </Button>
-                            <ComboBox x:Name="Filter2" HorizontalAlignment="Left" Margin="720,10,0,0" VerticalAlignment="Top" Width="155" SelectionChanged="Filter2_SelectionChanged">
+                            <ComboBox x:Name="Filter2" HorizontalAlignment="Left" Margin="480,10,0,0" VerticalAlignment="Top" Width="155" SelectionChanged="Filter2_SelectionChanged">
                                 <ComboBox.Foreground>
                                     <SolidColorBrush Color="{DynamicResource Color2}"/>
                                 </ComboBox.Foreground>
@@ -93,7 +93,7 @@
                                     </LinearGradientBrush>
                                 </Button.Background>
                             </Button>
-                            <ComboBox x:Name="Filter1" HorizontalAlignment="Left" Margin="640,10,0,0" VerticalAlignment="Top" Width="75" SelectionChanged="Filter1_SelectionChanged">
+                            <ComboBox x:Name="Filter1" HorizontalAlignment="Left" Margin="330,10,0,0" VerticalAlignment="Top" Width="145" SelectionChanged="Filter1_SelectionChanged">
                                 <ComboBox.Foreground>
                                     <SolidColorBrush Color="{DynamicResource Color2}"/>
                                 </ComboBox.Foreground>
@@ -117,7 +117,7 @@
                                     <SolidColorBrush Color="{DynamicResource Color1}"/>
                                 </TextBox.Background>
                             </TextBox>
-                            <TextBox x:Name="SortConfigParam" HorizontalAlignment="Left" Height="35" Margin="880,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="115" Text="1-2">
+                            <TextBox x:Name="SortConfigParam" HorizontalAlignment="Left" Height="35" Margin="640,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="75" Text="1-2">
                                 <TextBox.Foreground>
                                     <SolidColorBrush Color="{DynamicResource Color2}"/>
                                 </TextBox.Foreground>
@@ -125,7 +125,23 @@
                                     <SolidColorBrush Color="{DynamicResource Color1}"/>
                                 </TextBox.Background>
                             </TextBox>
-                            <ComboBox x:Name="Sortor1" HorizontalAlignment="Left" Margin="1000,10,0,0" VerticalAlignment="Top" Width="145" SelectionChanged="Sortor1_SelectionChanged">
+                            <ComboBox x:Name="Sortor1" HorizontalAlignment="Left" Margin="720,10,0,0" VerticalAlignment="Top" Width="115" SelectionChanged="Sortor1_SelectionChanged">
+                                <ComboBox.Foreground>
+                                    <SolidColorBrush Color="{DynamicResource Color2}"/>
+                                </ComboBox.Foreground>
+                                <ComboBox.Background>
+                                    <SolidColorBrush Color="{DynamicResource Color3}"/>
+                                </ComboBox.Background>
+                            </ComboBox>
+                            <TextBox x:Name="FilterRearParam" HorizontalAlignment="Left" Height="35" Margin="963,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" Text="1-10">
+                                <TextBox.Foreground>
+                                    <SolidColorBrush Color="{DynamicResource Color2}"/>
+                                </TextBox.Foreground>
+                                <TextBox.Background>
+                                    <SolidColorBrush Color="{DynamicResource Color1}"/>
+                                </TextBox.Background>
+                            </TextBox>
+                            <ComboBox x:Name="Sortor2" HorizontalAlignment="Left" Margin="840,10,0,0" VerticalAlignment="Top" Width="115" SelectionChanged="Sortor2_SelectionChanged">
                                 <ComboBox.Foreground>
                                     <SolidColorBrush Color="{DynamicResource Color2}"/>
                                 </ComboBox.Foreground>
@@ -166,7 +182,7 @@
                                 <SolidColorBrush Color="{DynamicResource Color5}"/>
                             </Button.Foreground>
                         </Button>
-                        <TextBox x:Name="DIC_Path" HorizontalAlignment="Left" Height="35" Margin="160,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="465" TextChanged="DIC_Path_TextChanged">
+                        <TextBox x:Name="DIC_Path" HorizontalAlignment="Left" Height="35" Margin="160,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="465" TextChanged="DIC_Path_TextChanged" IsReadOnly="True">
                             <TextBox.Foreground>
                                 <SolidColorBrush Color="{DynamicResource Color2}"/>
                             </TextBox.Foreground>
@@ -185,7 +201,7 @@
                                 <SolidColorBrush Color="{DynamicResource Color5}"/>
                             </Button.Foreground>
                         </Button>
-                        <TextBox x:Name="NewJsonFileName" HorizontalAlignment="Left" Height="35" Margin="790,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="536">
+                        <TextBox x:Name="NewJsonFileName" HorizontalAlignment="Left" Height="35" Margin="790,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="536" IsReadOnly="True">
                             <TextBox.Foreground>
                                 <SolidColorBrush Color="{DynamicResource Color2}"/>
                             </TextBox.Foreground>
@@ -205,7 +221,7 @@
                             <SolidColorBrush Color="{DynamicResource Color5}"/>
                         </Button.Foreground>
                     </Button>
-                    <TextBox x:Name="JPFileName" HorizontalAlignment="Left" Height="35" Margin="170,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="175">
+                    <TextBox x:Name="JPFileName" HorizontalAlignment="Left" Height="35" Margin="170,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="175" IsReadOnly="True">
                         <TextBox.Foreground>
                             <SolidColorBrush Color="{DynamicResource Color2}"/>
                         </TextBox.Foreground>
@@ -224,7 +240,7 @@
                             <SolidColorBrush Color="{DynamicResource Color5}"/>
                         </Button.Foreground>
                     </Button>
-                    <TextBox x:Name="CHFileName" HorizontalAlignment="Left" Height="35" Margin="510,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290">
+                    <TextBox x:Name="CHFileName" HorizontalAlignment="Left" Height="35" Margin="510,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" IsReadOnly="True">
                         <TextBox.Foreground>
                             <SolidColorBrush Color="{DynamicResource Color2}"/>
                         </TextBox.Foreground>

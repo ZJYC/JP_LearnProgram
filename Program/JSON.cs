@@ -284,6 +284,107 @@ namespace ZJYC_JSON
         }
 
     }
+
+    public class FilterRear
+    {
+        public string FilterMode = string.Empty;
+        public string FilterParam = string.Empty;
+
+        public string[] SupportedFilterMode = { "全部","起始","前几个","后几个"};
+
+        public FilterRear(string Mode)
+        {
+            this.FilterMode = Mode;
+        }
+        private void ParseConfigParam(string SortConfigParam, ref double CountMin, ref double CountMax)
+        {
+
+            double Min = 0, Max = 0;
+
+            if (SortConfigParam.Contains("-") == true)
+            {
+                string[] Split = SortConfigParam.Split('-');
+                Min = double.Parse(Split[0]);
+                Max = double.Parse(Split[1]);
+            }
+            else
+            {
+                Min = double.Parse(SortConfigParam);
+                Max = double.Parse(SortConfigParam);
+            }
+
+            CountMin = (Min <= Max ? Min : Max);
+            CountMax = (Min <= Max ? Max : Min);
+
+            CountMin -= 1;
+            CountMax -= 1;
+
+        }
+
+        delegate bool ShouldRemoveDelegate(ref List<Entry> Entries,Entry Entry, double Min, double Max);
+
+        private bool ShouldRemoveTemplate(ref List<Entry> Entries,Entry Entry, double Min, double Max)
+        {
+            return false;
+        }
+
+        private bool ShouldRemoveBeginToEnd(ref List<Entry> Entries, Entry Entry, double Min, double Max)
+        {
+            if (Min <= Entries.IndexOf(Entry) && Entries.IndexOf(Entry) <= Max) return false;
+            return true;
+        }
+
+        private bool ShouldRemoveTop(ref List<Entry> Entries, Entry Entry, double Min, double Max)
+        {
+            if (Entries.IndexOf(Entry) <= Max) return false;
+            return true;
+        }
+
+        private bool ShouldRemoveEnd(ref List<Entry> Entries, Entry Entry, double Min, double Max)
+        {
+            if (Entries.Count - 1 - Min <= Entries.IndexOf(Entry)) return false;
+            return true;
+        }
+
+        public void Filter(ref List<Entry> Entries)
+        {
+            try
+            {
+                if (this.FilterMode == string.Empty) int.Parse("");
+                if (SupportedFilterMode.Contains(this.FilterMode) == false) int.Parse("");
+
+                //全部：无事可做
+                if (this.FilterMode == "全部") { return; }
+                //进行过滤
+                double Min = 0, Max = 0;
+                ParseConfigParam(this.FilterParam, ref Min, ref Max);
+                ShouldRemoveDelegate ShouldRemove = new ShouldRemoveDelegate(ShouldRemoveTemplate);
+
+                if (this.FilterMode == "起始") ShouldRemove = new ShouldRemoveDelegate(ShouldRemoveBeginToEnd);
+                if (this.FilterMode == "前几个") ShouldRemove = new ShouldRemoveDelegate(ShouldRemoveTop);
+                if (this.FilterMode == "后几个") ShouldRemove = new ShouldRemoveDelegate(ShouldRemoveEnd);
+
+                for (int i = 0; i < Entries.Count;)
+                {
+                    if (ShouldRemove(ref Entries,Entries[i], Min, Max))
+                    {
+                        Entries.Remove(Entries[i]);
+                        i = 0;
+                    }
+                    else
+                    {
+                        i++;
+                    }
+                }
+
+            }
+            catch
+            {
+                MessageBox.Show("FilterRear.Filter");
+            }
+        }
+    }
+
     public class FinderFormer
     {
         private algorithm Algorithm = new algorithm();
@@ -477,7 +578,9 @@ namespace ZJYC_JSON
         }
         public void SetJsonFileName(string FileName)
         {
+            WritJsonFileFrCache();
             this.JsonFileName = FileName;
+            ReadJsonFileToCache();
         }
 
     }
