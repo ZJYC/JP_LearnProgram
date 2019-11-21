@@ -396,8 +396,13 @@ namespace WpfApp2
                     {
                         foreach (Entry entry in DC.DisplayContent)
                         {
-                            Writer.WriteLine(entry.JP);
-                            Writer.WriteLine(entry.CH);
+                            string Str1 = entry.JP;
+                            string Str2 = entry.CH;
+                            Str1 = Str1.Replace("<","\r\n<");
+                            Str2 = Str2.Replace("[","\r\n[");
+                            Writer.WriteLine(Str1);
+                            Writer.WriteLine(Str2);
+                            Writer.WriteLine("-------------------------------------------------------");
                         }
                     }
                     MessageBox.Show("成功保存到文件：" + FileName);
