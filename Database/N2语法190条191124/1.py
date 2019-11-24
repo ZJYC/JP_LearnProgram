@@ -14,10 +14,11 @@ with open("191124.txt",encoding='utf-8') as Lines:
         if Count % 5 == 0:JP.append(Line)
         if Count % 5 == 1:CH.append(Line)
         if Count % 5 == 2:USE.append(Line)
-        if Count % 5 == 3:EXCH.append(Line)
-        if Count % 5 == 4:EXJP.append(Line)
+        if Count % 5 == 3:EXJP.append(Line)
+        if Count % 5 == 4:EXCH.append(Line)
         Count = Count + 1
 for i in range(0,len(JP)):
     #print (JP[i] + "  <-->  " + USE[i])
-    print (CH[i])
+    #print (CH[i])
+    print (EXCH[i])
     
