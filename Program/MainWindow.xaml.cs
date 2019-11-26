@@ -46,6 +46,7 @@ namespace WpfApp2
         public FilterRear filterRear = new FilterRear("全部");
         public SingleChoiceQuestions SingleChoice = new SingleChoiceQuestions(ref zJSON, "顺序");
         public TranslateQuestion GetTranslate = new TranslateQuestion(ref zJSON,"顺序");
+        public Relevance relevance = new Relevance(ref zJSON, "顺序");
 
         public DisplayCache DC = new DisplayCache();
 
@@ -95,6 +96,9 @@ namespace WpfApp2
             ImportType.ItemsSource = NewOneClass.ItemsSource = new string[] { "单词","语法","翻译"};
 
             ImportType.SelectedIndex = NewOneClass.SelectedIndex = 0;
+
+            RelevanceMode.ItemsSource = relevance.SupportedMode;
+            RelevanceMode.SelectedIndex = 0;
 
             UpdateListView();
 
@@ -200,6 +204,7 @@ namespace WpfApp2
         {
             if (MainTableControl.SelectedIndex == 1) SingleChoice.ImportEntries(ref DC.DisplayContent, (string)SingleChoiceMode.SelectedValue);
             if (MainTableControl.SelectedIndex == 2) GetTranslate.ImportEntries(ref DC.DisplayContent,(string)TranslateMode.SelectedValue);
+            if (MainTableControl.SelectedIndex == 4) relevance.ImportEntries(ref DC.DisplayContent, (string)RelevanceMode.SelectedValue);
             UpdateListView();
         }
 
@@ -419,6 +424,36 @@ namespace WpfApp2
             filterRear.FilterMode = (string)Sortor2.SelectedValue;
             filterRear.FilterParam = FilterRearParam.Text;
             UpdateListView();
+        }
+
+        private void RelevanceMode_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            relevance.Mode = (string)RelevanceMode.SelectedValue;
+        }
+
+        private void RelevanceNext_Click(object sender, RoutedEventArgs e)
+        {
+            RelevanceAnswer1.Text = "";
+            RelevanceAnswer2.Text = "";
+            RelevanceAnswer3.Text = "";
+            RelevanceAnswer4.Text = "";
+            RelevanceAnswer5.Text = "";
+            RelevanceAnswer6.Text = "";
+            RelevanceQuestion.Text = "";
+
+            relevance.Mode = (string)RelevanceMode.SelectedValue;
+            relevance.GenOneQuestion(zJSON.JsonCache);
+
+            RelevanceAnswer1.Text = relevance.Out.RightAnswer[0].JP + "\r\n" + relevance.Out.RightAnswer[0].CH;
+            RelevanceAnswer2.Text = relevance.Out.RightAnswer[1].JP + "\r\n" + relevance.Out.RightAnswer[1].CH;
+            RelevanceAnswer3.Text = relevance.Out.RightAnswer[2].JP + "\r\n" + relevance.Out.RightAnswer[2].CH;
+            RelevanceAnswer4.Text = relevance.Out.RightAnswer[3].JP + "\r\n" + relevance.Out.RightAnswer[3].CH;
+            RelevanceAnswer5.Text = relevance.Out.RightAnswer[4].JP + "\r\n" + relevance.Out.RightAnswer[4].CH;
+            RelevanceAnswer6.Text = relevance.Out.RightAnswer[5].JP + "\r\n" + relevance.Out.RightAnswer[5].CH;
+            RelevanceQuestion.Text = relevance.Out.Question.JP + "\r\n" + relevance.Out.Question.CH;
+
+            RelevanceRemain.Text = relevance.Remain().ToString();
+
         }
     }
     

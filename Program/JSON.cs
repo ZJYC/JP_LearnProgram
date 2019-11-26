@@ -791,4 +791,71 @@ namespace ZJYC_JSON
             Json.WritJsonFileFrCache();
         }
     }
+    public class Relevance
+    {
+        public class OUT
+        {
+            public Entry Question;
+            public List<Entry> RightAnswer;
+        }
+
+        public OUT Out = new OUT();
+
+        private ZJSON Json;
+        private ZRandom zRandom = new ZRandom();
+        private Regular regular = new Regular();
+        private algorithm Algorithm = new algorithm();
+        public string Mode = string.Empty;
+        public string[] SupportedMode = { "顺序", "随机" };
+        private List<Entry> Entries = new List<Entry>();
+        private List<int> RegulrIndexList = new List<int>();
+        private List<int> RandomIndexList = new List<int>();
+        private Entry TstEntryThisTime;
+
+        public Relevance(ref ZJSON Json, string Mode)
+        {
+            this.Mode = Mode;
+            this.Json = Json;
+        }
+
+        public void ImportEntries(ref List<Entry> Entries, string Mode)
+        {
+            this.Entries.Clear();
+            foreach (Entry entry in Entries) this.Entries.Add(entry);
+            RandomIndexList = zRandom.List(0, Entries.Count - 1);
+            RegulrIndexList = regular.GetOrderList(0, Entries.Count - 1);
+        }
+
+        private void SelectOneEntryToUse()
+        {
+            List<int> IndexList = new List<int>();
+
+            if (Mode == "随机") IndexList = RandomIndexList;
+            if (Mode == "顺序") IndexList = RegulrIndexList;
+
+            if (IndexList.Count == 0)
+            {
+                MessageBox.Show("没有了");
+                return;
+            }
+            int Index = IndexList[0];
+            TstEntryThisTime = Entries[Index];
+            IndexList.Remove(Index);
+        }
+
+        public void GenOneQuestion(List<Entry> Entries)
+        {
+            SelectOneEntryToUse();
+            Out.RightAnswer = Algorithm.FindSimiliarEntry(Entries, TstEntryThisTime, 6);
+            Out.Question = TstEntryThisTime;
+        }
+        public int Remain()
+        {
+            List<int> IndexList = new List<int>();
+
+            if (Mode == "随机") IndexList = RandomIndexList;
+            if (Mode == "顺序") IndexList = RegulrIndexList;
+            return IndexList.Count;
+        }
+    }
 }

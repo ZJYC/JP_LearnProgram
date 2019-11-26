@@ -701,6 +701,54 @@
 
                 </Grid>
             </TabItem>
+            <TabItem Header="相关树">
+                <Grid>
+                    <Button x:Name="RelevanceNext" Content="开始或下一个" HorizontalAlignment="Left" Margin="560,10,0,0" VerticalAlignment="Top" Width="410" Focusable="False" Height="60" FontSize="36" Click="RelevanceNext_Click">
+                        <Button.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FF2E00FE" Offset="1"/>
+                                <GradientStop Color="#FFC900E8"/>
+                            </LinearGradientBrush>
+                        </Button.Background>
+                        <Button.Foreground>
+                            <SolidColorBrush Color="{DynamicResource Color5}"/>
+                        </Button.Foreground>
+                    </Button>
+                    <ComboBox x:Name="RelevanceMode" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="410" Height="60" SelectionChanged="RelevanceMode_SelectionChanged">
+                        <ComboBox.Foreground>
+                            <SolidColorBrush Color="{DynamicResource Color2}"/>
+                        </ComboBox.Foreground>
+                        <ComboBox.Background>
+                            <SolidColorBrush Color="{DynamicResource Color3}"/>
+                        </ComboBox.Background>
+                    </ComboBox>
+                    <TextBox x:Name="RelevanceQuestion" HorizontalAlignment="Left" Height="100" Margin="10,75,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="1316" IsReadOnly="True" FontFamily="Microsoft YaHei" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24">
+                        <TextBox.Foreground>
+                            <SolidColorBrush Color="{DynamicResource Color2}"/>
+                        </TextBox.Foreground>
+                        <TextBox.Background>
+                            <SolidColorBrush Color="{DynamicResource Color1}"/>
+                        </TextBox.Background>
+                    </TextBox>
+                    <TextBlock x:Name="RelevanceAnswer1" Text="Click me if you want to see something cool.  In fact, click as many times as you like." TextWrapping = "Wrap" Height="165" VerticalAlignment="Center" HorizontalAlignment="Center" Width="628" FontSize="24" FontWeight="Bold" Foreground="#FF0FC4EC" Margin="10,180,698,356" Background="Black"/>
+                    <TextBlock x:Name="RelevanceAnswer2" Text="Click me if you want to see something cool.  In fact, click as many times as you like." TextWrapping = "Wrap" Height="165" VerticalAlignment="Center" HorizontalAlignment="Center" Width="644" FontSize="24" FontWeight="Bold" Foreground="#FF0FC4EC" Margin="682,180,10,356" Background="Black"/>
+                    <TextBlock x:Name="RelevanceAnswer3" Text="Click me if you want to see something cool.  In fact, click as many times as you like." TextWrapping = "Wrap" Height="165" VerticalAlignment="Center" HorizontalAlignment="Center" Width="628" FontSize="24" FontWeight="Bold" Foreground="#FF0FC4EC" Margin="10,350,698,186" Background="Black" RenderTransformOrigin="0.505,0.286"/>
+                    <TextBlock x:Name="RelevanceAnswer4" Text="Click me if you want to see something cool.  In fact, click as many times as you like." TextWrapping = "Wrap" Height="165" VerticalAlignment="Center" HorizontalAlignment="Center" Width="644" FontSize="24" FontWeight="Bold" Foreground="#FF0FC4EC" Margin="682,350,10,186" Background="Black"/>
+                    <TextBlock x:Name="RelevanceAnswer5" Text="Click me if you want to see something cool.  In fact, click as many times as you like." TextWrapping = "Wrap" Height="170" VerticalAlignment="Center" HorizontalAlignment="Center" Width="628" FontSize="24" FontWeight="Bold" Foreground="#FF0FC4EC" Margin="10,521,698,10" Background="Black"/>
+                    <TextBlock x:Name="RelevanceAnswer6" Text="Click me if you want to see something cool.  In fact, click as many times as you like." TextWrapping = "Wrap" Height="170" VerticalAlignment="Center" HorizontalAlignment="Center" Width="644" FontSize="24" FontWeight="Bold" Foreground="#FF0FC4EC" Margin="682,521,10,10" Background="Black"/>
+                    <TextBox x:Name="RelevanceRemain" HorizontalAlignment="Left" Height="60" Margin="425,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="130" IsReadOnly="True" FontFamily="Microsoft YaHei" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24">
+                        <TextBox.Foreground>
+                            <SolidColorBrush Color="{DynamicResource Color2}"/>
+                        </TextBox.Foreground>
+                        <TextBox.Background>
+                            <SolidColorBrush Color="{DynamicResource Color1}"/>
+                        </TextBox.Background>
+                    </TextBox>
+
+
+                </Grid>
+            </TabItem>
+
         </TabControl>
 
     </Grid>

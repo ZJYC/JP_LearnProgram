@@ -25,6 +25,13 @@ namespace Algorithm
             public string Inf;
             public double Sim;
         }
+
+        class SimEntry
+        {
+            public Entry entry;
+            public double SimSum;
+        }
+
         public double Sim(string txt1, string txt2)
         {
             List<char> sl1 = txt1.ToCharArray().ToList();
@@ -55,6 +62,11 @@ namespace Algorithm
             return cos;
         }
 
+        public double SimOfEntry(Entry e1, Entry e2)
+        {
+            return (Sim(e1.CH, e2.CH) + Sim(e1.JP, e2.JP)) / 2;
+        }
+
         public int Random(int begin,int end)
         {
             return new Random(Guid.NewGuid().GetHashCode()).Next(begin, end + 1);
@@ -67,6 +79,19 @@ namespace Algorithm
                 return -1;
             }
             else if (a.Sim < b.Sim)
+            {
+                return 1;
+            }
+            return 0;
+        }
+
+        private int SortList(SimEntry a, SimEntry b)
+        {
+            if (a.SimSum > b.SimSum)
+            {
+                return -1;
+            }
+            else if (a.SimSum < b.SimSum)
             {
                 return 1;
             }
@@ -150,6 +175,32 @@ namespace Algorithm
                 SRC.Remove(SRC[Index]);
             }
             return DST;
+        }
+
+        public List<Entry> FindSimiliarEntry(List<Entry> Entries, Entry Basic, int X)
+        {
+            List<SimEntry> Res = new List<SimEntry>();
+
+            foreach (Entry entry in Entries)
+            {
+                Res.Add(new SimEntry { entry = entry, SimSum = SimOfEntry(entry, Basic) });
+            }
+
+            Res.Sort(SortList);
+
+            List<Entry> Ret = new List<Entry>();
+            int i = 0;
+
+            foreach (SimEntry res in Res)
+            {
+                if (Ret.Contains(res.entry) == false && res.SimSum < 1.0)
+                {
+                    Ret.Add(res.entry);
+                    if (++i >= X) break;
+                }
+            }
+
+            return Ret;
         }
 
     }
